@@ -1,0 +1,32 @@
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate {
+  animation: rotation 100s infinite linear;
+}
+
+.haik {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.ursus {
+  position: absolute;
+  right: 20%;
+  top: 25%;
+}
+.saffar {
+  position: absolute;
+  left: 15%;
+  top: 20%;
+}
+.planet {
+  z-index: 1;
+}

@@ -1,0 +1,49 @@
+@keyframes lighting {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+@keyframes opacity {
+  0% {
+    opacity: 60%;
+  }
+
+  50% {
+    opacity: 100%;
+  }
+
+  100% {
+    opacity: 61%;
+  }
+}
+.star {
+  animation: opacity 2s infinite, lighting 10s infinite linear;
+}
+
+#starfield::-webkit-scrollbar {
+  display: none;
+}
+
+#starfield {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.falling-star {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: blink 0.5s alternate infinite;
+}
+
+@keyframes blink {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 0.8;
+  }
+}
