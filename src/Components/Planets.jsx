@@ -68,6 +68,7 @@ export const Planets = (props) => {
       ],
     },
   ];
+
   return (
     <div
       className="bg-transparent absolute"
