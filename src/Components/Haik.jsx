@@ -1,5 +1,3 @@
-import { BlurFilter } from "pixi.js";
-import { Stage, Sprite, Container, Text } from "@pixi/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 export const Haik = (props) => {
@@ -11,8 +9,8 @@ export const Haik = (props) => {
           border: "1px dashed white",
           borderStyle: "dashed",
           borderRadius: "50%",
-          height: "9rem",
-          width: "9rem",
+          height: "10rem",
+          width: "10rem",
         }}
       ></div>
     </div>

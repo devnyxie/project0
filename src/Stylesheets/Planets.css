@@ -6,27 +6,84 @@
     transform: rotate(360deg);
   }
 }
-
-.rotate {
-  animation: rotation 100s infinite linear;
+@keyframes rotation-trajectory {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.haik {
+.rotate {
+  animation: rotation 160s infinite linear;
+}
+.rotate-trajectory {
+  animation: rotation-trajectory 500s infinite linear;
+}
+
+.center {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
 }
-.ursus {
-  position: absolute;
+.transform-center {
+  transform: translate(-50%, -50%);
+}
+.sun {
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+.haik {
+  transform: translate(-50%, -50%);
+  top: 50%;
+}
+
+.draugr {
+  left: 50%;
+  bottom: 0%;
+  transform: translate(-50%, 50%);
+}
+.colosseum {
   right: 20%;
-  top: 25%;
+  top: 0;
+  transform: translate(50%, 50%);
 }
+.ursus {
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.wadirum {
+  right: 0%;
+  top: 55%;
+  transform: translate(50%, -50%);
+}
+
 .saffar {
-  position: absolute;
-  left: 15%;
-  top: 20%;
+  transform: translate(-0%, 50%);
+  top: 10%;
+  right: 0%;
 }
+.solaris {
+  transform: translate(-20%, -50%);
+  top: 75%;
+}
+
 .planet {
+  aspect-ratio: 1/1;
   z-index: 1;
+}
+.trajectory {
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: 1px solid white;
+  opacity: 0.2;
+  /* center it properly! */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

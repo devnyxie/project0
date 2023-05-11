@@ -7,8 +7,8 @@ export const Ursus = (props) => {
           border: "1px dashed white",
           borderStyle: "dashed",
           borderRadius: "50%",
-          height: "9rem",
-          width: "9rem",
+          height: "10rem",
+          width: "10rem",
         }}
       ></div>
     </div>

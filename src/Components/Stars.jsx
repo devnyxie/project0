@@ -1,7 +1,4 @@
-import { BlurFilter } from "pixi.js";
-import { Stage, Sprite, Container, Text } from "@pixi/react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Falling_Stars } from "./Falling_Stars";
 
 export const Stars = () => {
   let currentStars = 0;
@@ -13,7 +10,6 @@ export const Stars = () => {
     { left: "30%", top: "75%" },
   ];
 
-  //
   const createFallingStar = () => {
     const starfield = document.getElementById("starfield");
     if (starfield && (currentStars > 0 || currentStars < 5)) {
@@ -65,9 +61,6 @@ export const Stars = () => {
   useEffect(() => {
     createFallingStar();
     const ranNum = Math.floor(Math.random() * 2) + 2;
-    for (let i = 0; i < ranNum; i++) {
-      createFallingStar();
-    }
   }, []);
   useEffect(() => {
     const stars = Array.from(document.querySelectorAll(".star-div"));
@@ -77,9 +70,7 @@ export const Stars = () => {
         star.classList.add("star");
       }, delay * i);
     });
-    // Start the animation by creating the first falling star
-
-    //
+    createFallingStar();
   }, []);
 
   return (
@@ -88,7 +79,7 @@ export const Stars = () => {
       id="starfield"
       style={{ height: "100%", width: "100%" }}
     >
-      {starPositions.map((star) => {
+      {/* {starPositions.map((star) => {
         return (
           <div
             className="text-white absolute star-div"
@@ -102,7 +93,7 @@ export const Stars = () => {
             *
           </div>
         );
-      })}
+      })} */}
     </div>
   );
 };

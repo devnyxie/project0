@@ -3,6 +3,9 @@ import { Haik } from "./Haik";
 import { Saffar } from "./Saffar";
 import { Ursus } from "./Ursus";
 import LineTo, { Line } from "react-lineto";
+import { Draugr } from "./Draugr";
+import { Wadirum } from "./Wadirum";
+import { Trajectory } from "./Trajectory";
 
 export const Planets = (props) => {
   const [containerWidth, setContainerWidth] = useState(window.innerWidth);
@@ -18,48 +21,80 @@ export const Planets = (props) => {
       window.removeEventListener("resize", handleResize);
     };
   });
+
+  const linesData = [
+    { from: "haik", to: "ursus" },
+    { from: "haik", to: "saffar" },
+    { from: "saffar", to: "ursus" },
+    { from: "haik", to: "draugr" },
+    { from: "draugr", to: "saffar" },
+  ];
+
+  //
+  //
+  //
+  //
+  //add positions!
+  //we will pass size as a prop to trajectory when we gonna map!
+  const trajectories = [
+    {
+      size: 0,
+      planets: [{ title: "sun", size: 12 }],
+    },
+    {
+      size: 25,
+      planets: [{ title: "solaris", size: 5 }],
+    },
+    {
+      size: 40,
+      planets: [{ title: "saffar", size: 7 }],
+    },
+    {
+      size: 60,
+      planets: [{ title: "haik", size: 6 }],
+    },
+    {
+      size: 75,
+      planets: [
+        { title: "wadirum", size: 6 },
+        { title: "ursus", size: 6 },
+      ],
+    },
+    {
+      size: 88,
+      planets: [
+        { title: "draugr", size: 10 },
+        { title: "colosseum", size: 9 },
+      ],
+    },
+  ];
   return (
     <div
       className="bg-transparent absolute"
-      style={{ height: "100%", width: "100%" }}
+      style={{ height: "100%", width: "100%", overflow: "hidden" }}
     >
-      <Haik />
-      <Ursus />
-      <Saffar />
-      {/*--- lines ---*/}
-      <LineTo
-        from="haik"
-        to="ursus"
-        stroke={"white"}
-        strokeWidth={2}
-        zIndex={0}
-        borderColor={"white"}
-        borderStyle={"dashed"}
-        className={"line"}
-        delay={0}
-      />
-      <LineTo
-        from="haik"
-        to="saffar"
-        stroke={"white"}
-        strokeWidth={2}
-        zIndex={0}
-        borderColor={"white"}
-        borderStyle={"dashed"}
-        className={"line"}
-        delay={0}
-      />
-      <LineTo
-        from="saffar"
-        to="ursus"
-        stroke={"white"}
-        strokeWidth={2}
-        zIndex={0}
-        borderColor={"white"}
-        borderStyle={"dashed"}
-        className={"line"}
-        delay={0}
-      />
+      {trajectories.map((trajectory) => {
+        return (
+          <Trajectory size={trajectory.size} planets={trajectory.planets} />
+        );
+      })}
+
+      {/* {linesData.map((line, index) => {
+        return (
+          <LineTo
+            key={index}
+            from={line.from}
+            to={line.to}
+            stroke={"white"}
+            strokeWidth={2}
+            zIndex={0}
+            borderColor={"#707070"}
+            borderStyle={"dashed"}
+            className={"line"}
+            delay={0}
+          />
+        );
+      })} */}
     </div>
   );
 };

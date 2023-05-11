@@ -1,8 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
-export const Saffar = (props) => {
+export const Wadirum = (props) => {
   return (
-    <div className="planet saffar" id="saffar" style={{ width: "max-content" }}>
+    <div
+      className="planet wadirum"
+      id="wadirum"
+      style={{ width: "max-content" }}
+    >
       <div
         className="text-white rotate bg-black"
         style={{
