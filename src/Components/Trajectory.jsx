@@ -1,16 +1,15 @@
 export const Trajectory = (props) => {
-  console.log(props.planets);
   return (
-    <div className="trajectory relative " style={{ height: `${props.size}vh` }}>
+    <div className={`trajectory relative trajectory-${props.index}`}>
       <div
         className="rotate-trajectory"
         style={{ height: "100%", widht: "100%" }}
       >
-        {props.planets.map((planet, index) => {
+        {/* {props.planets.map((planet, index) => {
           return (
             <div
               key={index}
-              className={`planet ${planet.title}`}
+              className={`${planet.title}`}
               style={{
                 position: "absolute",
                 height: `${planet.size}vh`,
@@ -27,7 +26,7 @@ export const Trajectory = (props) => {
               ></div>
             </div>
           );
-        })}
+        })} */}
       </div>
     </div>
   );

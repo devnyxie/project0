@@ -18,9 +18,9 @@
 .rotate {
   animation: rotation 160s infinite linear;
 }
-.rotate-trajectory {
+/* .rotate-trajectory {
   animation: rotation-trajectory 500s infinite linear;
-}
+} */
 
 .center {
   position: absolute;
@@ -63,8 +63,8 @@
 }
 
 .saffar {
-  transform: translate(-0%, 50%);
-  top: 10%;
+  transform: translate(-50%, -50%);
+  top: 12%;
   right: 0%;
 }
 .solaris {
@@ -74,7 +74,6 @@
 
 .planet {
   aspect-ratio: 1/1;
-  z-index: 1;
 }
 .trajectory {
   aspect-ratio: 1/1;
@@ -86,4 +85,23 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.trajectory-0 {
+  height: 0vh;
+}
+.trajectory-1 {
+  height: 25vh;
+}
+.trajectory-2 {
+  height: 40vh;
+}
+.trajectory-3 {
+  height: 60vh;
+}
+.trajectory-4 {
+  height: 75vh;
+}
+.trajectory-5 {
+  height: 88vh;
 }
