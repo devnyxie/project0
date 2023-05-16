@@ -31,37 +31,25 @@ export const Planets = (props) => {
       title: "wadirum",
       size: 7,
     },
-    {
-      title: "solo",
-      size: 12,
-    },
   ];
   return (
     <div
       className="bg-transparent absolute "
       style={{ height: "100%", width: "100%" }}
     >
-      <TransformWrapper disablePadding={"false"}>
-        <TransformComponent>
-          <div>
-            <Draggable>
-              <div style={{ height: "100vh", width: "100vw" }}>
-                {trajectories.map((trajectory, index) => {
-                  console.log(trajectory);
-                  return (
-                    <Trajectory
-                      key={index}
-                      size={trajectory.size}
-                      title={trajectory.title}
-                      index={index}
-                    />
-                  );
-                })}
-              </div>
-            </Draggable>
-          </div>
-        </TransformComponent>
-      </TransformWrapper>
+      <div style={{ height: "100vh", width: "100vw" }}>
+        {trajectories.map((trajectory, index) => {
+          console.log(trajectory);
+          return (
+            <Trajectory
+              key={index}
+              size={trajectory.size}
+              title={trajectory.title}
+              index={index}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
