@@ -6,9 +6,12 @@ function App() {
   return (
     <div
       className="bg-transparent relative"
-      style={{ width: "100vw", height: "100vh" }}
+      style={{
+        width: "100vw",
+        height: "100vh",
+        backgroundColor: "black",
+      }}
     >
-      <Stars />
       <Planets />
     </div>
   );
