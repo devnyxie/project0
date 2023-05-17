@@ -1,5 +1,7 @@
+//exports
 export const SOLAR_SYSTEM = "SOLAR_SYSTEM";
 
+//actions
 export const getSolarSystem = () => {
   return async (dispatch, getState) => {
     try {

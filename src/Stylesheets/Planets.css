@@ -18,19 +18,10 @@
 .rotate {
   animation: rotation 160s infinite linear;
 }
-/* .rotate-trajectory {
+.rotate-trajectory {
   animation: rotation-trajectory 500s infinite linear;
-} */
+}
 
-.center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-.transform-center {
-  transform: translate(-50%, -50%);
-}
 .sun {
   transform: translate(-50%, -50%);
   top: 50%;
@@ -83,12 +74,15 @@
 
 .planet {
   aspect-ratio: 1/1;
+  border: 1px dashed rgb(211, 211, 211);
+  border-style: dashed;
+  border-radius: 50%;
+  height: 100%;
 }
 .trajectory {
   aspect-ratio: 1/1;
   border-radius: 50%;
-  border: 1px solid white;
-  opacity: 0.2;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   /* center it properly! */
   position: absolute;
   left: 50%;

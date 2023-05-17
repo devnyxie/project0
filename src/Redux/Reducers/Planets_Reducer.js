@@ -1,4 +1,4 @@
-import { SOLAR_SYSTEM } from "../Actions/Planets";
+import { SOLAR_SYSTEM } from "../Actions/Planets_Actions";
 const initialState = {
   solar_system: [],
 };

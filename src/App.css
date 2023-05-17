@@ -1,5 +1,18 @@
-.wrapper-react-zoom-pan-pinch {
+.monospace {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.center {
   position: absolute;
-  top: 50%;
   left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.center-top {
+  position: absolute;
+  left: 50%;
+  top: 0px;
+  /* transform: translate(-50%, -50%); */
 }

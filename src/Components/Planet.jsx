@@ -1,4 +1,4 @@
-export const Trajectory = (props) => {
+export const Planet = (props) => {
   return (
     <div className={`trajectory relative trajectory-${props.index}`}>
       <div
@@ -6,20 +6,15 @@ export const Trajectory = (props) => {
         style={{ height: "100%", width: "100%" }}
       >
         <div
-          className={`${props.title}`}
+          className={`${props.planet.planet_name}`}
           style={{
             position: "absolute",
-            height: `${props.size}vh`,
+            height: `${props.planet.planet_size}vh`,
           }}
         >
           <div
             className={`planet rotate text-white bg-black `}
-            style={{
-              border: "1px dashed white",
-              borderStyle: "dashed",
-              borderRadius: "50%",
-              height: `100%`,
-            }}
+            style={{}}
           ></div>
         </div>
       </div>
