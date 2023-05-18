@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React from "react";
 import ReactDOM from "react-dom";
+import { TerminalOutput } from "../../Redux/Actions/Terminal_Actions";
 export const General_Chat = () => {
   const contentRef = React.useRef(null);
   const logs_data = useSelector(
