@@ -8,6 +8,7 @@ import Reducer from "../Reducers/Reducer";
 const persistConfig = {
   key: "root",
   storage,
+  whitelist: ["planets_data"], // Specify the reducer(s) you want to persist
 };
 
 const persistedReducer = persistReducer(persistConfig, Reducer);

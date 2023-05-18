@@ -8,7 +8,7 @@ const Planets_Reducer = (state = initialState, action) => {
     case SOLAR_SYSTEM:
       return {
         ...state,
-        planets: action.payload,
+        solar_system: action.payload,
       };
     default:
       return state;

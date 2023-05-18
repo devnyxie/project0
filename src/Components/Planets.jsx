@@ -6,11 +6,16 @@ import Draggable from "react-draggable";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { useDispatch, useSelector } from "react-redux";
 import { getSolarSystem } from "../Redux/Actions/Planets_Actions";
+import { TerminalOutput } from "../Redux/Actions/Terminal_Actions";
 
 export const Planets = (props) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
-  const planets = useSelector((state) => state.planets_data.planets);
+  const solar_system = useSelector((state) => state.planets_data.solar_system);
+  const messages = useSelector(
+    (state) => state.terminal_data.terminal_messages
+  );
+
   const dispatch = useDispatch();
   useEffect(() => {
     const handleResize = () => {
@@ -25,10 +30,15 @@ export const Planets = (props) => {
     };
   }, []);
   useEffect(() => {
-    if (planets === undefined || planets.length === 0) {
+    if (solar_system === undefined || solar_system.length === 0) {
       dispatch(getSolarSystem());
+    } else {
+      dispatch(
+        TerminalOutput({ message: "Cosmic System Data is already retrieved." })
+      );
     }
   }, []);
+  console.log(messages);
 
   return (
     <div
@@ -66,8 +76,8 @@ export const Planets = (props) => {
                 width: "130vw",
               }}
             >
-              {planets ? (
-                planets.map((planet, index) => {
+              {solar_system ? (
+                solar_system.map((planet, index) => {
                   // console.log(trajectory);
                   return <Planet key={index} planet={planet} index={index} />;
                 })

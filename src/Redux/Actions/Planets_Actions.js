@@ -1,3 +1,5 @@
+import { TerminalOutput } from "./Terminal_Actions";
+
 //exports
 export const SOLAR_SYSTEM = "SOLAR_SYSTEM";
 
@@ -14,7 +16,7 @@ export const getSolarSystem = () => {
           type: SOLAR_SYSTEM,
           payload: solar_system,
         });
-        console.log(solar_system);
+        dispatch(TerminalOutput({ message: "Cosmic System Data Retrieved." }));
       } else {
         console.log("Error fetching data");
       }
