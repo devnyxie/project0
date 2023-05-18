@@ -22,7 +22,6 @@ export const Time = () => {
       clearInterval(interval);
     };
   }, []);
-  console.log(hours);
   return (
     <div className="flex justify-center items-center monospace widget text-center text-white time-widget center-top p-1 relative">
       {time}

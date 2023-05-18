@@ -1,4 +1,7 @@
 export const Planet = (props) => {
+  const handleClick = () => {
+    props.handlePlanetClick("title");
+  };
   return (
     <div className={`trajectory relative trajectory-${props.index}`}>
       <div
@@ -13,8 +16,8 @@ export const Planet = (props) => {
           }}
         >
           <div
+            onClick={handleClick}
             className={`planet rotate text-white bg-black `}
-            style={{}}
           ></div>
         </div>
       </div>

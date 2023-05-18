@@ -52,7 +52,6 @@
   top: 55%;
   transform: translate(50%, -50%);
 }
-
 .saffar {
   transform: translate(-50%, -50%);
   top: 12%;
@@ -110,7 +109,4 @@
 }
 .trajectory-6 {
   height: 110vh;
-}
-.trajectory-7 {
-  height: 130vh;
 }

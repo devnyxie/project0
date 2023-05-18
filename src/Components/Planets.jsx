@@ -11,6 +11,7 @@ import { TerminalOutput } from "../Redux/Actions/Terminal_Actions";
 export const Planets = (props) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+
   const solar_system = useSelector((state) => state.planets_data.solar_system);
   const messages = useSelector(
     (state) => state.terminal_data.terminal_messages
@@ -39,7 +40,16 @@ export const Planets = (props) => {
     }
   }, []);
   console.log(messages);
-
+  //
+  //
+  //
+  //
+  //
+  const [currentPlanet, setCurrentPlanet] = useState({});
+  const handlePlanetClick = (planet) => {
+    console.log(planet);
+    // setCurrentPlanet(planet); // Update the currentPlanet in the state
+  };
   return (
     <div
       style={{
@@ -79,7 +89,15 @@ export const Planets = (props) => {
               {solar_system ? (
                 solar_system.map((planet, index) => {
                   // console.log(trajectory);
-                  return <Planet key={index} planet={planet} index={index} />;
+                  return (
+                    <Planet
+                      key={index}
+                      planet={planet}
+                      index={index}
+                      // handlePlanetClick={handlePlanetClick}
+                      handlePlanetClick={() => handlePlanetClick()}
+                    />
+                  );
                 })
               ) : (
                 <></>

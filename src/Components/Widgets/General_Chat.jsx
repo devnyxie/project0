@@ -59,6 +59,7 @@ export const General_Chat = () => {
           (tab, index) => {
             return (
               <div
+                key={index}
                 className="p-1 cursor-pointer text-center grow opacity-50 general-chat-widget-tabs"
                 id={tab}
                 onClick={changeTab.bind(null, tab)}
