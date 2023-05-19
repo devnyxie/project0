@@ -19,13 +19,13 @@ export const Planets = (props) => {
   console.log(solar_system);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (solar_system === undefined || solar_system.length === 0) {
-      dispatch(getSolarSystem());
-    } else {
-      dispatch(
-        TerminalOutput({ message: "Cosmic System Data is already retrieved." })
-      );
-    }
+    // if (solar_system === undefined || solar_system.length === 0) {
+    dispatch(getSolarSystem());
+    // } else {
+    //   dispatch(
+    //     TerminalOutput({ message: "Cosmic System Data is already retrieved." })
+    //   );
+    // }
   }, []);
   //
   //
