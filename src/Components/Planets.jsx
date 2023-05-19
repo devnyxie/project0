@@ -61,8 +61,8 @@ export const Planets = (props) => {
           >
             <div
               style={{
-                height: "1500px",
-                width: "1500px",
+                height: "130vh",
+                width: "130vw",
               }}
             >
               {solar_system ? (
