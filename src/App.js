@@ -24,10 +24,7 @@ function App() {
       }}
     >
       <Planets />
-      <Widgets />
-      {/* <General_Chat />
-      <Quests />
-      <Time /> */}
+      {/* <Widgets /> */}
     </div>
   );
 }
