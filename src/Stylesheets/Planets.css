@@ -89,24 +89,24 @@
   transform: translate(-50%, -50%);
 }
 
-.trajectory-0 {
+.trajectory-1 {
   height: 0vh;
 }
-.trajectory-1 {
-  height: 25vh;
-}
 .trajectory-2 {
-  height: 40vh;
+  height: 350px;
 }
 .trajectory-3 {
-  height: 60vh;
+  height: 500px;
 }
 .trajectory-4 {
-  height: 75vh;
+  height: 700px;
 }
 .trajectory-5 {
-  height: 95vh;
+  height: 900px;
 }
 .trajectory-6 {
-  height: 110vh;
+  height: 1100px;
+}
+.trajectory-7 {
+  height: 1300px;
 }

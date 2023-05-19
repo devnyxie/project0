@@ -3,7 +3,7 @@ export const Planet = (props) => {
     props.handlePlanetClick("title");
   };
   return (
-    <div className={`trajectory relative trajectory-${props.index}`}>
+    <div className={`trajectory relative trajectory-${props.planet.planet_id}`}>
       <div
         className="rotate-trajectory"
         style={{ height: "100%", width: "100%" }}

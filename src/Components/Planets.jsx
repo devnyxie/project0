@@ -16,20 +16,8 @@ export const Planets = (props) => {
   const messages = useSelector(
     (state) => state.terminal_data.terminal_messages
   );
-
+  console.log(solar_system);
   const dispatch = useDispatch();
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-      setScreenHeight(window.innerHeight);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
   useEffect(() => {
     if (solar_system === undefined || solar_system.length === 0) {
       dispatch(getSolarSystem());
@@ -39,13 +27,11 @@ export const Planets = (props) => {
       );
     }
   }, []);
-  console.log(messages);
   //
   //
   //
   //
   //
-  const [currentPlanet, setCurrentPlanet] = useState({});
   const handlePlanetClick = (planet) => {
     console.log(planet);
     // setCurrentPlanet(planet); // Update the currentPlanet in the state
@@ -68,34 +54,25 @@ export const Planets = (props) => {
       >
         <TransformWrapper centerOnInit={true}>
           <TransformComponent
-            centerOnInit={true}
             wrapperStyle={{
               height: "100%",
               width: "100%",
-              // display: "flex",
-              // alignItems: "center",
-              // justifyContent: "center",
             }}
-            // contentClass="wrapper-react-zoom-pan-pinch"
-            // contentStyle={{}}
           >
             <div
               style={{
-                // aspectRatio: "1 / 1",
-                height: "130vh",
-                width: "130vw",
+                height: "1500px",
+                width: "1500px",
               }}
             >
               {solar_system ? (
                 solar_system.map((planet, index) => {
-                  // console.log(trajectory);
                   return (
                     <Planet
                       key={index}
                       planet={planet}
                       index={index}
-                      // handlePlanetClick={handlePlanetClick}
-                      handlePlanetClick={() => handlePlanetClick()}
+                      handlePlanetClick={handlePlanetClick}
                     />
                   );
                 })
