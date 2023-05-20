@@ -8,7 +8,7 @@ export const General_Chat = () => {
   const logs_data = useSelector(
     (state) => state.terminal_data.terminal_messages
   );
-
+  const opacity = useSelector((state) => state.style_data.widgets_opacity);
   useEffect(() => {
     changeTab("Logs");
   });
@@ -46,6 +46,7 @@ export const General_Chat = () => {
         width: "450px",
         right: "50px",
         bottom: "50px",
+        opacity: opacity,
       }}
     >
       <header
