@@ -6,14 +6,15 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { useDispatch, useSelector } from "react-redux";
 import { getSolarSystem } from "../Redux/Actions/Planets_Actions";
 import { TerminalOutput } from "../Redux/Actions/Terminal_Actions";
+import {
+  highWidgetsOpacity,
+  lowWidgetsOpacity,
+} from "../Redux/Actions/Style_Actions";
 
 export const Planets = (props) => {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
-  const [targetPlanet, setTargetPlanet] = useState(null);
-  const [currentPlanet, setCurrentPlanet] = useState("haik");
-
   // const solar_system = useSelector((state) => state.planets_data.solar_system);
+  const [startPoint] = React.useState({ x: 23, y: 50 });
+  const [endPoint, setEndPoint] = React.useState({ x: 23, y: 50 });
   const solar_system = [
     {
       planet_id: 7,
@@ -64,48 +65,109 @@ export const Planets = (props) => {
       planet_size: "12",
     },
   ];
-  const messages = useSelector(
-    (state) => state.terminal_data.terminal_messages
-  );
+
   const dispatch = useDispatch();
   useEffect(() => {
-    if (solar_system === undefined || solar_system.length === 0) {
-      dispatch(getSolarSystem());
-    } else {
-      dispatch(
-        TerminalOutput({ message: "Cosmic System Data is already retrieved." })
-      );
-    }
+    // if (solar_system === undefined || solar_system.length === 0) {
+    dispatch(getSolarSystem());
+    // } else {
+    //   dispatch(
+    //     TerminalOutput({ message: "Cosmic System Data is already retrieved." })
+    //   );
+    // }
   }, []);
-  //
-  //
-  //
-  //
-  //
-  const handlePlanetClick = (props) => {
-    // const x1 = 50;
-    // const y1 = 50;
-    // const x2 = props.planet_position.left;
-    // const y2 = props.planet_position.top;
-    // const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-    // setTargetPlanet(props.planet_name);
-    // console.log(
-    //   `The distance between the two planets is ${Math.round(distance)}vh.`
-    // );
-  };
+  // const handlePlanetClick = (props) => {
+  // const x1 = 50;
+  // const y1 = 50;
+  // const x2 = props.planet_position.left;
+  // const y2 = props.planet_position.top;
+  // const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+  // setTargetPlanet(props.planet_name);
+  // console.log(
+  //   `The distance between the two planets is ${Math.round(distance)}vh.`
+  // );
+  // };
 
-  const containerRef = React.useRef(null);
-  const [startPoint] = React.useState({ x: 50, y: 50 });
-  const [endPoint, setEndPoint] = React.useState({ x: 23, y: 50 });
+  const drawLineToPlanet = (event) => {
+    const containerElement = document.getElementById(
+      "solar-system-100-container"
+    );
+    const containerBounds = containerElement.getBoundingClientRect();
+    const targetElement = event.target;
+    const targetBounds = targetElement.getBoundingClientRect();
 
-  const handleContainerClick = (event) => {
-    const containerBounds = containerRef.current.getBoundingClientRect();
     const x =
-      ((event.clientX - containerBounds.left) / containerBounds.width) * 100;
+      ((targetBounds.left - containerBounds.left + targetBounds.width / 2) /
+        containerBounds.width) *
+      100;
     const y =
-      ((event.clientY - containerBounds.top) / containerBounds.height) * 100;
+      ((targetBounds.top - containerBounds.top + targetBounds.height / 2) /
+        containerBounds.height) *
+      100;
+
     setEndPoint({ x, y });
   };
+
+  const handlePlanetClick = (event) => {
+    drawLineToPlanet(event);
+  };
+
+  //
+  //
+  //
+  //
+  //
+  function drawOrbitTrash(divId, trashAmount) {
+    const div = document.getElementById(divId);
+
+    // Clear existing trash
+    div.innerHTML = "";
+
+    const trashSizeMin = 2; // Minimum size of trash (pixels)
+    const trashSizeMax = 4; // Maximum size of trash (pixels)
+    const maxTrashPerRadius = 120; // Maximum number of trash elements per radius
+    const radiusIncrement = 15; // Radius increment when moving to the next circle
+
+    let radius = 215; // Initial radius of the circle (adjust as needed)
+    let trashCount = 0; // Counter for the number of created trash elements
+
+    for (let i = 0; i < trashAmount; i++) {
+      const trash = document.createElement("div");
+      trash.classList.add("center");
+
+      const angle = (trashCount / maxTrashPerRadius) * Math.PI * 2;
+      const randomDistance = Math.random() * (radiusIncrement - trashSizeMax);
+      const x = Math.cos(angle) * (radius + randomDistance);
+      const y = Math.sin(angle) * (radius + randomDistance);
+      const trashSize =
+        Math.floor(Math.random() * (trashSizeMax - trashSizeMin + 1)) +
+        trashSizeMin;
+      trash.style.width = trashSize + "px";
+      trash.style.height = trashSize + "px";
+      trash.style.transform = `translate(${x}px, ${y}px)`;
+
+      setTimeout(() => {
+        const randomBorderRadius = Math.floor(Math.random() * 50); // Random border-radius value between 0 and 50
+        trash.style.borderRadius = `${randomBorderRadius}%`; // Apply the random border-radius value
+        trash.classList.add("orbit-trash"); // Add the "orbit-trash" class after a delay
+      }, Math.random() * 1000); // Random micro delay (0-1000 milliseconds)
+
+      div.appendChild(trash);
+
+      trashCount++;
+
+      // Move to the next radius if the maximum number of trash elements per radius is reached
+      if (trashCount >= maxTrashPerRadius) {
+        radius += radiusIncrement;
+        trashCount = 0; // Reset the trash counter for the new radius
+      }
+    }
+  }
+
+  useEffect(() => {
+    drawOrbitTrash("orbit-trash-content", 120); // Adjust the desired number of trash elements
+  }, []);
+
   return (
     <div
       style={{
@@ -122,7 +184,16 @@ export const Planets = (props) => {
         }}
         className="center"
       >
-        <TransformWrapper centerOnInit={true}>
+        <TransformWrapper
+          centerOnInit={true}
+          doubleClick={{
+            disabled: "true",
+          }}
+          // onWheelStart={(event) => dispatch(lowWidgetsOpacity())}
+          // onWheelStop={(event) => dispatch(highWidgetsOpacity())}
+          onPanning={(event) => dispatch(lowWidgetsOpacity())}
+          onPanningStop={(event) => dispatch(highWidgetsOpacity())}
+        >
           <TransformComponent
             wrapperStyle={{
               height: "100%",
@@ -132,8 +203,8 @@ export const Planets = (props) => {
             <div
               style={{
                 height: "130vh",
-                border: "1px solid red",
-                aspectRatio: 1 / 1,
+                // aspectRatio: 1 / 1,
+                width: "130vw",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -141,27 +212,13 @@ export const Planets = (props) => {
             >
               <div
                 className="solar-system-100-container"
-                onClick={handleContainerClick}
-                ref={containerRef}
+                id="solar-system-100-container"
                 style={{
                   height: "100vh",
-                  border: "1px solid white",
                   aspectRatio: 1 / 1,
                   position: "relative",
                 }}
               >
-                <LineTo
-                  from={currentPlanet}
-                  to={targetPlanet}
-                  within="solar-system-100-container"
-                  stroke={"white"}
-                  strokeWidth={2}
-                  zIndex={0}
-                  borderColor={"white"}
-                  borderStyle={"dashed"}
-                  className={"line"}
-                  delay={0}
-                />
                 <svg
                   viewBox="0 0 100 100"
                   preserveAspectRatio="none"
@@ -176,7 +233,13 @@ export const Planets = (props) => {
                     y1={startPoint.y}
                     x2={endPoint.x}
                     y2={endPoint.y}
-                    style={{ stroke: "red", strokeWidth: 2 }}
+                    style={{
+                      stroke: "white",
+                      strokeWidth: 0.2,
+                      strokeDasharray: 0.3,
+
+                      opacity: 0.5,
+                    }}
                   />
                 </svg>
                 {solar_system ? (
@@ -193,6 +256,13 @@ export const Planets = (props) => {
                 ) : (
                   <></>
                 )}
+                <div
+                  className="center"
+                  style={{ aspectRatio: 1 / 1, height: "50vh" }}
+                  id="orbit"
+                >
+                  <div id="orbit-trash-content" className="w-full h-full"></div>
+                </div>
               </div>
             </div>
           </TransformComponent>

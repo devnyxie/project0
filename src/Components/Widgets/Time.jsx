@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { IoMoonOutline, IoSunnyOutline } from "react-icons/io5";
+import { useSelector } from "react-redux";
 
 export const Time = () => {
+  const opacity = useSelector((state) => state.style_data.widgets_opacity);
   const [time, setTime] = useState("Loading...");
   const [hours, setHours] = useState(null);
 
@@ -23,7 +25,10 @@ export const Time = () => {
     };
   }, []);
   return (
-    <div className="flex justify-center items-center monospace widget text-center text-white time-widget center-top p-1 relative">
+    <div
+      className="flex justify-center items-center monospace widget text-center text-white time-widget center-top p-1 relative"
+      style={{ opacity: opacity }}
+    >
       {time}
       <div className="absolute flex" style={{ right: "5%" }}>
         {/* {hours >} */}

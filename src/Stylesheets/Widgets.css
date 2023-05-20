@@ -7,4 +7,6 @@
   position: absolute;
   border: 1px solid rgb(255, 255, 255, 0.1);
   backdrop-filter: blur(0.75px);
+  transition-duration: 2s;
+  transition: opacity 0.5s;
 }
