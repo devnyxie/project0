@@ -24,29 +24,35 @@ export const Planet = (props) => {
         }}
       >
         <div className="planet-container relative w-full h-full">
-          {props.planet.planet_name === user.current_location &&
-          props.planet.planet_name !== "sun" ? (
-            <div
-              className="compass-container"
+          <div
+            className="compass-container"
+            style={{
+              position: "absolute",
+              left: "50%",
+              bottom: "-10%",
+              transform: "translate(-50%, 100%)",
+              opacity:
+                props.planet.planet_name === user.current_location &&
+                props.planet.planet_name !== "sun"
+                  ? 1
+                  : 0,
+              visibility:
+                props.planet.planet_name === user.current_location &&
+                props.planet.planet_name !== "sun"
+                  ? "visible"
+                  : "hidden",
+              transition: "0.2s",
+            }}
+          >
+            <RiCompassDiscoverLine
+              size={25}
               style={{
-                position: "absolute",
-                left: "50%",
-                bottom: "-10%",
-                transform: "translate(-50%, 100%)",
+                color: "white",
+                opacity: 0.6,
+                transform: "rotate(-45deg)",
               }}
-            >
-              <RiCompassDiscoverLine
-                size={25}
-                style={{
-                  color: "white",
-                  opacity: 0.6,
-                  transform: "rotate(-45deg)",
-                }}
-              />
-            </div>
-          ) : (
-            <></>
-          )}
+            />
+          </div>
 
           <div
             className={`planet rotate text-white bg-black ${props.planet.planet_name} `}
