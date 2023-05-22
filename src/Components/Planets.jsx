@@ -10,9 +10,16 @@ import {
   highWidgetsOpacity,
   lowWidgetsOpacity,
 } from "../Redux/Actions/Style_Actions";
+import { drawOrbitTrash } from "./Functions/OrbitTrash";
+import { drawLineToPlanet } from "./Functions/LineToPlanet";
+import { CHANGE_ASTEROID_DENSITY } from "../Redux/Actions/Settings_Actions";
 
 export const Planets = (props) => {
   // const solar_system = useSelector((state) => state.planets_data.solar_system);
+  const asteroid_density = useSelector(
+    (state) => state.settings_data.asteroid_density
+  );
+
   const [startPoint] = React.useState({ x: 23, y: 50 });
   const [endPoint, setEndPoint] = React.useState({ x: 23, y: 50 });
   const solar_system = [
@@ -76,96 +83,20 @@ export const Planets = (props) => {
     //   );
     // }
   }, []);
-  // const handlePlanetClick = (props) => {
-  // const x1 = 50;
-  // const y1 = 50;
-  // const x2 = props.planet_position.left;
-  // const y2 = props.planet_position.top;
-  // const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-  // setTargetPlanet(props.planet_name);
-  // console.log(
-  //   `The distance between the two planets is ${Math.round(distance)}vh.`
-  // );
-  // };
-
-  const drawLineToPlanet = (event) => {
-    const containerElement = document.getElementById(
-      "solar-system-100-container"
-    );
-    const containerBounds = containerElement.getBoundingClientRect();
-    const targetElement = event.target;
-    const targetBounds = targetElement.getBoundingClientRect();
-
-    const x =
-      ((targetBounds.left - containerBounds.left + targetBounds.width / 2) /
-        containerBounds.width) *
-      100;
-    const y =
-      ((targetBounds.top - containerBounds.top + targetBounds.height / 2) /
-        containerBounds.height) *
-      100;
-
-    setEndPoint({ x, y });
-  };
 
   const handlePlanetClick = (event) => {
-    drawLineToPlanet(event);
+    drawLineToPlanet(event, { setEndPoint });
   };
-
-  //
-  //
-  //
-  //
-  //
-  function drawOrbitTrash(divId, trashAmount) {
-    const div = document.getElementById(divId);
-
-    // Clear existing trash
-    div.innerHTML = "";
-
-    const trashSizeMin = 2; // Minimum size of trash (pixels)
-    const trashSizeMax = 4; // Maximum size of trash (pixels)
-    const maxTrashPerRadius = 120; // Maximum number of trash elements per radius
-    const radiusIncrement = 15; // Radius increment when moving to the next circle
-
-    let radius = 215; // Initial radius of the circle (adjust as needed)
-    let trashCount = 0; // Counter for the number of created trash elements
-
-    for (let i = 0; i < trashAmount; i++) {
-      const trash = document.createElement("div");
-      trash.classList.add("center");
-
-      const angle = (trashCount / maxTrashPerRadius) * Math.PI * 2;
-      const randomDistance = Math.random() * (radiusIncrement - trashSizeMax);
-      const x = Math.cos(angle) * (radius + randomDistance);
-      const y = Math.sin(angle) * (radius + randomDistance);
-      const trashSize =
-        Math.floor(Math.random() * (trashSizeMax - trashSizeMin + 1)) +
-        trashSizeMin;
-      trash.style.width = trashSize + "px";
-      trash.style.height = trashSize + "px";
-      trash.style.transform = `translate(${x}px, ${y}px)`;
-
-      setTimeout(() => {
-        const randomBorderRadius = Math.floor(Math.random() * 50); // Random border-radius value between 0 and 50
-        trash.style.borderRadius = `${randomBorderRadius}%`; // Apply the random border-radius value
-        trash.classList.add("orbit-trash"); // Add the "orbit-trash" class after a delay
-      }, Math.random() * 1000); // Random micro delay (0-1000 milliseconds)
-
-      div.appendChild(trash);
-
-      trashCount++;
-
-      // Move to the next radius if the maximum number of trash elements per radius is reached
-      if (trashCount >= maxTrashPerRadius) {
-        radius += radiusIncrement;
-        trashCount = 0; // Reset the trash counter for the new radius
-      }
-    }
-  }
-
   useEffect(() => {
-    drawOrbitTrash("orbit-trash-content", 120); // Adjust the desired number of trash elements
+    console.log(asteroid_density.value);
+    if (asteroid_density.value) {
+      drawOrbitTrash("orbit-trash-content", asteroid_density.value); // Adjust the desired number of asteroids
+    } else {
+      dispatch({
+        type: CHANGE_ASTEROID_DENSITY,
+        payload: { setting: "medium", value: 120 },
+      });
+    }
   }, []);
 
   return (
@@ -189,8 +120,6 @@ export const Planets = (props) => {
           doubleClick={{
             disabled: "true",
           }}
-          // onWheelStart={(event) => dispatch(lowWidgetsOpacity())}
-          // onWheelStop={(event) => dispatch(highWidgetsOpacity())}
           onPanning={(event) => dispatch(lowWidgetsOpacity())}
           onPanningStop={(event) => dispatch(highWidgetsOpacity())}
         >

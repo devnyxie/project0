@@ -14,7 +14,19 @@
     transform: rotate(360deg);
   }
 }
+@keyframes elementAnimation {
+  0% {
+    width: 10vh;
+    height: 10vh;
+    opacity: 1;
+  }
 
+  100% {
+    width: 20vh;
+    height: 20vh;
+    opacity: 0;
+  }
+}
 .rotate {
   animation: rotation 160s infinite linear;
 }
@@ -63,7 +75,8 @@
 }
 
 .trajectory-1 {
-  height: 0vh;
+  height: 10vh;
+  animation: elementAnimation 5s infinite;
 }
 .trajectory-2 {
   height: 25vh;

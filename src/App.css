@@ -16,3 +16,15 @@
   top: 0px;
   transform: translate(-50%, -50%);
 }
+.transform-center {
+  transform: translate(-50%, -50%);
+}
+.logout-button {
+  color: white;
+  transition: 0.1s;
+  cursor: pointer;
+}
+.logout-button:hover {
+  color: #dc3545;
+  transition: 0.1s;
+}

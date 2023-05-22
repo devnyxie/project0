@@ -9,6 +9,7 @@ import "./Stylesheets/Planets.css";
 import "./Stylesheets/Stars.css";
 import "./Stylesheets/Line.css";
 import "./Stylesheets/Widgets.css";
+import "./App.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

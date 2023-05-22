@@ -26,8 +26,8 @@ export const Time = () => {
   }, []);
   return (
     <div
-      className="flex justify-center items-center monospace widget text-center text-white time-widget center-top p-1 relative"
-      style={{ opacity: opacity }}
+      className="flex justify-center items-center monospace widget text-center text-white time-widget p-1 relative"
+      style={{ opacity: opacity, top: 0, left: "50%" }}
     >
       {time}
       <div className="absolute flex" style={{ right: "5%" }}>

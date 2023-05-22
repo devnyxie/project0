@@ -8,5 +8,34 @@
   border: 1px solid rgb(255, 255, 255, 0.1);
   backdrop-filter: blur(0.75px);
   transition-duration: 2s;
-  transition: opacity 0.5s;
+  transition: background-color 0.15s, opacity 0.5s;
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+.widget:hover {
+  background-color: rgb(255, 255, 255, 0.1);
+  transition: background-color 0.15s;
+}
+.widget:active {
+  background-color: rgb(255, 255, 255, 0.15);
+}
+/* menu */
+.widget-menu {
+  border: 1px solid rgb(255, 255, 255, 0.1);
+  padding-left: 4vh;
+  padding-right: 4vh;
+}
+.menu-button {
+  padding: 0.5vh;
+  padding-left: 5vh;
+  padding-right: 5vh;
+  border: 1px solid rgb(255, 255, 255, 0.1);
+  margin-bottom: 1vh;
+  cursor: pointer;
+}
+.menu-button:hover {
+  background-color: rgb(255, 255, 255, 0.1);
+  transition: background-color 0.15s;
 }

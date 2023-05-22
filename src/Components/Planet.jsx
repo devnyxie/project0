@@ -1,5 +1,7 @@
-import { SlLocationPin } from "react-icons/sl";
+import { RiCompassDiscoverLine } from "react-icons/ri";
+import { GiCompass } from "react-icons/gi";
 import { useSelector } from "react-redux";
+import { Tooltip } from "./Tooltip/Tooltip";
 export const Planet = (props) => {
   // const location = useSelector((state) => state.player_data.current_location);
   const location = "haik";
@@ -31,15 +33,16 @@ export const Planet = (props) => {
               style={{
                 position: "absolute",
                 left: "50%",
-                top: "-2.5%",
-                transform: "translate(-50%, -100%)",
+                bottom: "-10%",
+                transform: "translate(-50%, 100%)",
               }}
             >
-              <SlLocationPin
-                size={30}
+              <RiCompassDiscoverLine
+                size={25}
                 style={{
                   color: "white",
-                  opacity: 0.25,
+                  opacity: 0.6,
+                  transform: "rotate(-45deg)",
                 }}
               />
             </div>
