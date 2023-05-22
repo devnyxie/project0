@@ -1,10 +1,7 @@
 import { RiCompassDiscoverLine } from "react-icons/ri";
-import { GiCompass } from "react-icons/gi";
 import { useSelector } from "react-redux";
-import { Tooltip } from "./Tooltip/Tooltip";
 export const Planet = (props) => {
-  // const location = useSelector((state) => state.player_data.current_location);
-  const location = "haik";
+  const user = useSelector((state) => state.user_data.user);
   return (
     <>
       <div
@@ -27,9 +24,10 @@ export const Planet = (props) => {
         }}
       >
         <div className="planet-container relative w-full h-full">
-          {props.planet.planet_name === location &&
+          {props.planet.planet_name === user.current_location &&
           props.planet.planet_name !== "sun" ? (
             <div
+              className="compass-container"
               style={{
                 position: "absolute",
                 left: "50%",
@@ -58,7 +56,7 @@ export const Planet = (props) => {
           {props.planet.planet_name !== "sun" ? (
             <div
               className="center planet-actions"
-              onClick={props.handlePlanetClick}
+              onClick={() => props.handlePlanetClick(props.planet)}
             ></div>
           ) : (
             <></>

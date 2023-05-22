@@ -10,87 +10,51 @@ import {
   highWidgetsOpacity,
   lowWidgetsOpacity,
 } from "../Redux/Actions/Style_Actions";
-import { drawOrbitTrash } from "./Functions/OrbitTrash";
+import { createAsteroids } from "./Functions/Asteroids";
 import { drawLineToPlanet } from "./Functions/LineToPlanet";
 import { CHANGE_ASTEROID_DENSITY } from "../Redux/Actions/Settings_Actions";
+import { changeLocation, getUser } from "../Redux/Actions/User_Actions";
+import { findObjectByValue } from "./Functions/FindObjInArr";
+import { findLocation } from "./Functions/findLocation";
+import { insertDotAfterFirstChar } from "./Functions/insertDotAfterFirstChar";
 
 export const Planets = (props) => {
-  // const solar_system = useSelector((state) => state.planets_data.solar_system);
+  const dispatch = useDispatch();
+  const solar_system = useSelector((state) => state.planets_data.solar_system);
+  const user = useSelector((state) => state.user_data.user);
+  const [position, setPosition] = useState(findLocation(solar_system, user));
+  const [timeToTravel, setTimeToTravel] = useState(10);
   const asteroid_density = useSelector(
     (state) => state.settings_data.asteroid_density
   );
-
+  //line
   const [startPoint] = React.useState({ x: 23, y: 50 });
   const [endPoint, setEndPoint] = React.useState({ x: 23, y: 50 });
-  const solar_system = [
-    {
-      planet_id: 7,
-      planet_name: "solo",
-      planet_position: { left: 50, top: 0 },
-      planet_size: "12",
-      cities: ["Aurora Prime", "Celestia"],
-    },
-    {
-      planet_id: 6,
-      planet_name: "wadirum",
-      planet_position: { left: 100, top: 50 },
-      planet_size: "7",
-      cities: ["Crystalline Oasis", "Luminary Sands"],
-    },
-    {
-      planet_id: 5,
-      planet_name: "draugr",
-      planet_position: { left: 50, top: 100 },
-      planet_size: "12",
-      cities: ["Obsidian Citadel", "Eclipseville", "Nocturnia"],
-    },
-    {
-      planet_id: 4,
-      planet_name: "haik",
-      planet_position: { left: 23, top: 50 },
-      planet_size: "10",
-      cities: ["Nebula Heights", "Nova Haven"],
-    },
-    {
-      planet_id: 3,
-      planet_name: "saffar",
-      planet_position: { left: 68, top: 42 },
-      planet_size: "7",
-      cities: ["Asteria", "Sandsea Settlement", "Sandstorm Outpost"],
-    },
-    {
-      planet_id: 2,
-      planet_name: "solaris",
-      planet_position: { left: 43, top: 60 },
-      planet_size: "5",
-      cities: ["Solaris Station", "Solstice Springs"],
-    },
-    {
-      planet_id: 1,
-      planet_name: "sun",
-      planet_position: { left: 50, top: 50 },
-      planet_size: "12",
-    },
-  ];
-
-  const dispatch = useDispatch();
+  //line end
+  //fetches
   useEffect(() => {
-    // if (solar_system === undefined || solar_system.length === 0) {
-    dispatch(getSolarSystem());
-    // } else {
-    //   dispatch(
-    //     TerminalOutput({ message: "Cosmic System Data is already retrieved." })
-    //   );
-    // }
+    if (solar_system === undefined || solar_system.length === 0) {
+      dispatch(getSolarSystem());
+      dispatch(getUser());
+    } else {
+      dispatch(
+        TerminalOutput({ message: "Cosmic System Data is already retrieved." })
+      );
+    }
   }, []);
+  //fetches end
 
-  const handlePlanetClick = (event) => {
-    drawLineToPlanet(event, { setEndPoint });
-  };
+  //line func
+  // const handlePlanetClick = (event) => {
+  //   drawLineToPlanet(event, { setEndPoint });
+  // };
+  //line end
+
+  //create asteroids
   useEffect(() => {
     console.log(asteroid_density.value);
     if (asteroid_density.value) {
-      drawOrbitTrash("orbit-trash-content", asteroid_density.value); // Adjust the desired number of asteroids
+      createAsteroids("orbit-trash-content", asteroid_density.value); // Adjust the desired number of asteroids
     } else {
       dispatch({
         type: CHANGE_ASTEROID_DENSITY,
@@ -98,7 +62,37 @@ export const Planets = (props) => {
       });
     }
   }, []);
+  //end asteroids
+  //move to planet
+  const handlePlanetClick = (props) => {
+    const location = findObjectByValue(solar_system, user.current_location);
+    const x1 = location.planet_position.left;
+    const y1 = location.planet_position.top;
+    const x2 = props.planet_position.left;
+    const y2 = props.planet_position.top;
+    const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    setTimeToTravel(Math.round(distance));
+    dispatch(
+      TerminalOutput({
+        message: `Calculations were successful, you will arrive approximetely in ${insertDotAfterFirstChar(
+          distance
+        )}s`,
+      })
+    );
 
+    const animatePixel = (finalX, finalY) => {
+      setPosition({ x: finalX, y: finalY });
+    };
+
+    animatePixel(x2, y2); // Example usage
+    console.log(props.planet_name);
+    dispatch(changeLocation(props.planet_name));
+  };
+  const { x, y } = position;
+
+  //end move to planet
+
+  useEffect(() => {});
   return (
     <div
       style={{
@@ -148,7 +142,23 @@ export const Planets = (props) => {
                   position: "relative",
                 }}
               >
-                <svg
+                <div
+                  id="spaceship"
+                  style={{
+                    width: "3px",
+                    height: "3px",
+                    background: "white",
+                    position: "absolute",
+                    left: `${x}%`,
+                    top: `${y}%`,
+                    transition: `left ${insertDotAfterFirstChar(
+                      timeToTravel
+                    )}s linear, top ${insertDotAfterFirstChar(
+                      timeToTravel
+                    )}s linear`,
+                  }}
+                ></div>
+                {/* <svg
                   viewBox="0 0 100 100"
                   preserveAspectRatio="none"
                   style={{
@@ -170,7 +180,7 @@ export const Planets = (props) => {
                       opacity: 0.5,
                     }}
                   />
-                </svg>
+                </svg> */}
                 {solar_system ? (
                   solar_system.map((planet, index) => {
                     return (

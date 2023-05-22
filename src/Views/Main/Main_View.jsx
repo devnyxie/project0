@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Planets } from "../../Components/Planets";
 import { Widgets } from "../../Components/Layers/Widgets";
-import { Stars } from "../../Components/Stars";
 export const Main_View = () => {
   return (
     <div

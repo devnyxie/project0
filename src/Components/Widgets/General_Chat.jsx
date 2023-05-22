@@ -27,6 +27,7 @@ export const General_Chat = () => {
         case "Logs":
           logs_data.forEach((log) => {
             const logNode = document.createElement("div");
+            logNode.classList.add(".mt-10");
             logNode.textContent = log.message;
             contentNode.appendChild(logNode); // Append new log node
           });
@@ -49,9 +50,11 @@ export const General_Chat = () => {
         opacity: opacity,
       }}
     >
-      <header
+      <div
+        className=""
         style={{
           display: "flex",
+          height: "30px",
           width: "100%",
           borderBottom: "1px solid rgb(255, 255, 255, 0.1)",
         }}
@@ -74,25 +77,8 @@ export const General_Chat = () => {
             );
           }
         )}
-      </header>
-      <div className="p-2">
-        {/* <div className="text-xs pb-2">
-          <span className="me-2  opacity-25">2:33</span>
-          <span>
-            <span className="underline ">unknown_traveler</span> arrived to
-            Nebula Prime.
-          </span>
-        </div>
-        <div className="text-xs pb-2">
-          <span className="me-2  opacity-25">2:39</span>
-          <span>Trader has landed on </span>
-          <span className="underline ">Haik</span>
-          <span>
-            . Make your way to their location to discover the intriguing
-            assortment of new artifacts they have brought.
-          </span>
-        </div> */}
-
+      </div>
+      <div className="p-2" style={{ height: "220px", overflow: "auto" }}>
         <div ref={contentRef}></div>
       </div>
     </div>

@@ -6,7 +6,6 @@ const MenuModalComponent = (props) => {
   // const [settingsModalShow, setSettingsModalShow] = useState(false);
   const [modalShow, setModalShow] = useState(false);
 
-  console.log(props);
   return (
     <div
       className="monospace text-center text-white p-1 transform-center center"

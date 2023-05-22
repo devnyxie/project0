@@ -1,4 +1,4 @@
-export const drawOrbitTrash = (divId, trashAmount) => {
+export const createAsteroids = (divId, trashAmount) => {
   const div = document.getElementById(divId);
 
   // Clear existing trash

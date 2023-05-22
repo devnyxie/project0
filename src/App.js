@@ -1,12 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
-import { Planets } from "./Components/Planets";
-import { Widgets } from "./Components/Layers/Widgets";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { connectToSocket } from "./Redux/Actions/Socket_Actions";
 import { Main_View } from "./Views/Main/Main_View";
