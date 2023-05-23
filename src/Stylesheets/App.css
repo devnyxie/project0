@@ -28,3 +28,18 @@
   color: #dc3545;
   transition: 0.1s;
 }
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-column {
+  flex-direction: column;
+}
+
+.spaceship {
+  width: 3px;
+  height: 3px;
+  background: white;
+  position: absolute;
+}

@@ -11,7 +11,7 @@ const persistConfig = {
   key: "root",
   storage,
   whitelist: [
-    "planets_data",
+    // "planets_data",
     "settings_data",
     Settings_Reducer,
     "user_data",
