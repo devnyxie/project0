@@ -7,10 +7,7 @@ export const Planet = (props) => {
       <div
         className={`trajectory relative trajectory-${props.planet.planet_id}`}
       >
-        <div
-          className="rotate-trajectory"
-          style={{ height: "100%", width: "100%", zIndex: 1 }}
-        ></div>
+        <div style={{ height: "100%", width: "100%", zIndex: 1 }}></div>
       </div>
 
       <div

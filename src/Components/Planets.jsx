@@ -17,17 +17,19 @@ import { changeLocation, getUser } from "../Redux/Actions/User_Actions";
 import { findObjectByValue } from "./Functions/FindObjInArr";
 import { findLocation } from "./Functions/findLocation";
 import { insertDotAfterFirstChar } from "./Functions/insertDotAfterFirstChar";
+import { moveToLocation } from "../Redux/Actions/Socket_Actions";
+import { v4 as uuidv4 } from "uuid";
 
 export const Planets = (props) => {
   const dispatch = useDispatch();
   const solar_system = useSelector((state) => state.planets_data.solar_system);
+  const movingUsers = useSelector((state) => state.socket_data.moving_users);
   const user = useSelector((state) => state.user_data.user);
   const [position, setPosition] = useState({});
-  useEffect(() => {
-    dispatch(getUser());
-    dispatch(getSolarSystem());
-    // dispatch(TerminalOutput({ message: position }));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getUser());
+  //   dispatch(getSolarSystem());
+  // }, []);
 
   useEffect(() => {
     if (solar_system.length > 0 && Object.keys(user).length > 0) {
@@ -71,28 +73,65 @@ export const Planets = (props) => {
     const y1 = location.planet_position.top;
     const x2 = props.planet_position.left;
     const y2 = props.planet_position.top;
+    // const from = {x1, y1}
+    dispatch(moveToLocation({ x1, y1 }, { x2, y2 }));
     const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     setTimeToTravel(Math.round(distance));
     dispatch(
       TerminalOutput({
         message: `Calculations were successful, you will arrive approximetely in ${insertDotAfterFirstChar(
-          distance
+          Math.round(distance)
         )}s`,
       })
     );
 
-    const animatePixel = (finalX, finalY) => {
-      setPosition({ x: finalX, y: finalY });
-    };
+    // const animatePixel = (finalX, finalY) => {
+    //   setPosition({ x: finalX, y: finalY });
+    // };
 
-    animatePixel(x2, y2); // Example usage
-    console.log(props.planet_name);
+    // animatePixel(x2, y2); // Example usage
+    // console.log(props.planet_name);
     dispatch(changeLocation(props.planet_name));
   };
   const { x, y } = position;
-
+  console.log("movingUsers", movingUsers);
   //end move to planet
+  useEffect(() => {
+    if (Object.keys(movingUsers).length !== 0) {
+      const user = movingUsers;
 
+      console.log("Creating moving spaceship...");
+      const x1 = user.from.x1;
+      const y1 = user.from.y1;
+      const x2 = user.to.x2;
+      const y2 = user.to.y2;
+      const container = document.getElementById("solar-system-100-container");
+      const ship = document.createElement("div");
+      const uniqueId = uuidv4();
+      ship.setAttribute("id", `${uniqueId}`);
+      ship.setAttribute("class", "spaceship");
+      ship.style.left = `${x1}%`;
+      ship.style.top = `${y1}%`;
+      ship.style.backgroundColor = `red`;
+      ship.style.transition = "left 2s linear, top 2s linear";
+      console.log("appending...");
+      container.appendChild(ship);
+
+      console.log("grabbing by id...");
+
+      setTimeout(() => {
+        const ship_start_moving = document.getElementById(uniqueId);
+        console.log("grabbed...");
+        console.log("grabbed ship:", ship_start_moving);
+        console.log(`changing ships location from ${x1} ${y1} to ${x2} ${y2}`);
+        ship_start_moving.style.left = `${x2}%`;
+        ship_start_moving.style.top = `${y2}%`;
+      }, 10);
+      // ship.style.left = `${x2}%`;
+      // ship.style.top = `${y2}%`;
+      console.log("moved...");
+    }
+  }, [movingUsers]);
   return (
     <div
       style={{
@@ -143,12 +182,8 @@ export const Planets = (props) => {
                 }}
               >
                 <div
-                  id="spaceship"
+                  className="spaceship"
                   style={{
-                    width: "3px",
-                    height: "3px",
-                    background: "white",
-                    position: "absolute",
                     left: `${x}%`,
                     top: `${y}%`,
                     transition: `left ${insertDotAfterFirstChar(
