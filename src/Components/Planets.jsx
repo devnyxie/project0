@@ -22,7 +22,19 @@ export const Planets = (props) => {
   const dispatch = useDispatch();
   const solar_system = useSelector((state) => state.planets_data.solar_system);
   const user = useSelector((state) => state.user_data.user);
-  const [position, setPosition] = useState(findLocation(solar_system, user));
+  const [position, setPosition] = useState({});
+  useEffect(() => {
+    dispatch(getUser());
+    dispatch(getSolarSystem());
+    // dispatch(TerminalOutput({ message: position }));
+  }, []);
+
+  useEffect(() => {
+    if (solar_system.length > 0 && Object.keys(user).length > 0) {
+      setPosition(findLocation(solar_system, user));
+      console.log(position);
+    }
+  }, [solar_system, user]);
   const [timeToTravel, setTimeToTravel] = useState(10);
   const asteroid_density = useSelector(
     (state) => state.settings_data.asteroid_density
@@ -31,18 +43,6 @@ export const Planets = (props) => {
   const [startPoint] = React.useState({ x: 23, y: 50 });
   const [endPoint, setEndPoint] = React.useState({ x: 23, y: 50 });
   //line end
-  //fetches
-  useEffect(() => {
-    // if (solar_system === undefined || solar_system.length === 0) {
-    dispatch(getSolarSystem());
-    dispatch(getUser());
-    // } else {
-    //   dispatch(
-    //     TerminalOutput({ message: "Cosmic System Data is already retrieved." })
-    //   );
-    // }
-  }, []);
-  //fetches end
 
   //line func
   // const handlePlanetClick = (event) => {
@@ -61,10 +61,11 @@ export const Planets = (props) => {
         payload: { setting: "medium", value: 120 },
       });
     }
-  }, []);
+  }, [asteroid_density]);
   //end asteroids
   //move to planet
   const handlePlanetClick = (props) => {
+    console.log("handleClick", user);
     const location = findObjectByValue(solar_system, user.current_location);
     const x1 = location.planet_position.left;
     const y1 = location.planet_position.top;
@@ -92,7 +93,6 @@ export const Planets = (props) => {
 
   //end move to planet
 
-  useEffect(() => {});
   return (
     <div
       style={{
