@@ -1,0 +1,52 @@
+[
+    {
+      "planet_id": 1,
+      "planet_name": "sun",
+      "planet_size": 12,
+      "planet_position_x": 50,
+      "planet_position_y": 50
+    },
+    {
+      "planet_id": 2,
+      "planet_name": "solaris",
+      "planet_size": 5,
+      "planet_position_x": 60,
+      "planet_position_y": 43
+    },
+    {
+      "planet_id": 3,
+      "planet_name": "saffar",
+      "planet_size": 7,
+      "planet_position_x": 42,
+      "planet_position_y": 68
+    },
+    {
+      "planet_id": 4,
+      "planet_name": "haik",
+      "planet_size": 10,
+      "planet_position_x": 50,
+      "planet_position_y": 23
+    },
+    {
+      "planet_id": 5,
+      "planet_name": "draugr",
+      "planet_size": 12,
+      "planet_position_x": 100,
+      "planet_position_y": 50
+    },
+    {
+      "planet_id": 6,
+      "planet_name": "wadirum",
+      "planet_size": 7,
+      "planet_position_x": 50,
+      "planet_position_y": 100
+    },
+    {
+      "planet_id": 7,
+      "planet_name": "solo",
+      "planet_size": 12,
+      "planet_position_x": 0,
+      "planet_position_y": 50
+    }
+  ]
+  

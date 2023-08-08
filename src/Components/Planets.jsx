@@ -19,31 +19,30 @@ import { findLocation } from "./Functions/findLocation";
 import { insertDotAfterFirstChar } from "./Functions/insertDotAfterFirstChar";
 import { moveToLocation } from "../Redux/Actions/Socket_Actions";
 import { v4 as uuidv4 } from "uuid";
+import map from "./Map/map.json"
 
 export const Planets = (props) => {
+  console.log(map)
   const dispatch = useDispatch();
-  const solar_system = useSelector((state) => state.planets_data.solar_system);
+  // const solar_system = useSelector((state) => state.planets_data.solar_system);
+  const solar_system = map;
   const movingUsers = useSelector((state) => state.socket_data.moving_users);
   const user = useSelector((state) => state.user_data.user);
   const [position, setPosition] = useState({});
-  // useEffect(() => {
-  //   dispatch(getUser());
-  //   dispatch(getSolarSystem());
-  // }, []);
 
-  useEffect(() => {
-    if (solar_system.length > 0 && Object.keys(user).length > 0) {
-      setPosition(findLocation(solar_system, user));
-      console.log(position);
-    }
-  }, [solar_system, user]);
+  // useEffect(() => {
+  //   if (solar_system.length > 0 && Object.keys(user).length > 0) {
+  //     setPosition(findLocation(solar_system, user));
+  //     console.log(position);
+  //   }
+  // }, [solar_system, user]);
   const [timeToTravel, setTimeToTravel] = useState(10);
   const asteroid_density = useSelector(
     (state) => state.settings_data.asteroid_density
   );
   //line
-  const [startPoint] = React.useState({ x: 23, y: 50 });
-  const [endPoint, setEndPoint] = React.useState({ x: 23, y: 50 });
+  // const [startPoint] = React.useState({ x: 23, y: 50 });
+  // const [endPoint, setEndPoint] = React.useState({ x: 23, y: 50 });
   //line end
 
   //line func
@@ -58,80 +57,80 @@ export const Planets = (props) => {
     if (asteroid_density.value) {
       createAsteroids("orbit-trash-content", asteroid_density.value); // Adjust the desired number of asteroids
     } else {
-      dispatch({
-        type: CHANGE_ASTEROID_DENSITY,
-        payload: { setting: "medium", value: 120 },
-      });
+      // dispatch({
+      //   type: CHANGE_ASTEROID_DENSITY,
+      //   payload: { setting: "medium", value: 120 },
+      // });
     }
   }, [asteroid_density]);
   //end asteroids
   //move to planet
   const handlePlanetClick = (props) => {
-    console.log("handleClick", user);
-    const location = findObjectByValue(solar_system, user.current_location);
-    const x1 = location.planet_position.left;
-    const y1 = location.planet_position.top;
-    const x2 = props.planet_position.left;
-    const y2 = props.planet_position.top;
-    // const from = {x1, y1}
-    dispatch(moveToLocation({ x1, y1 }, { x2, y2 }));
-    const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-    setTimeToTravel(Math.round(distance));
-    dispatch(
-      TerminalOutput({
-        message: `Calculations were successful, you will arrive approximetely in ${insertDotAfterFirstChar(
-          Math.round(distance)
-        )}s`,
-      })
-    );
+    // console.log("handleClick", user);
+    // const location = findObjectByValue(solar_system, user.current_location);
+    // const x1 = location.planet_position.left;
+    // const y1 = location.planet_position.top;
+    // const x2 = props.planet_position.left;
+    // const y2 = props.planet_position.top;
+    // // const from = {x1, y1}
+    // dispatch(moveToLocation({ x1, y1 }, { x2, y2 }));
+    // const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    // setTimeToTravel(Math.round(distance));
+    // dispatch(
+    //   TerminalOutput({
+    //     message: `Calculations were successful, you will arrive approximetely in ${insertDotAfterFirstChar(
+    //       Math.round(distance)
+    //     )}s`,
+    //   }) 
+    // );
 
-    // const animatePixel = (finalX, finalY) => {
-    //   setPosition({ x: finalX, y: finalY });
-    // };
+    // // const animatePixel = (finalX, finalY) => {
+    // //   setPosition({ x: finalX, y: finalY });
+    // // };
 
-    // animatePixel(x2, y2); // Example usage
-    // console.log(props.planet_name);
-    dispatch(changeLocation(props.planet_name));
+    // // animatePixel(x2, y2); // Example usage
+    // // console.log(props.planet_name);
+    // dispatch(changeLocation(props.planet_name));
   };
   const { x, y } = position;
   console.log("movingUsers", movingUsers);
   //end move to planet
-  useEffect(() => {
-    if (Object.keys(movingUsers).length !== 0) {
-      const user = movingUsers;
+  // useEffect(() => {
+  //   if (Object.keys(movingUsers).length !== 0) {
+  //     const user = movingUsers;
 
-      console.log("Creating moving spaceship...");
-      const x1 = user.from.x1;
-      const y1 = user.from.y1;
-      const x2 = user.to.x2;
-      const y2 = user.to.y2;
-      const container = document.getElementById("solar-system-100-container");
-      const ship = document.createElement("div");
-      const uniqueId = uuidv4();
-      ship.setAttribute("id", `${uniqueId}`);
-      ship.setAttribute("class", "spaceship");
-      ship.style.left = `${x1}%`;
-      ship.style.top = `${y1}%`;
-      ship.style.backgroundColor = `red`;
-      ship.style.transition = "left 2s linear, top 2s linear";
-      console.log("appending...");
-      container.appendChild(ship);
+  //     console.log("Creating moving spaceship...");
+  //     const x1 = user.from.x1;
+  //     const y1 = user.from.y1;
+  //     const x2 = user.to.x2;
+  //     const y2 = user.to.y2;
+  //     const container = document.getElementById("solar-system-100-container");
+  //     const ship = document.createElement("div");
+  //     const uniqueId = uuidv4();
+  //     ship.setAttribute("id", `${uniqueId}`);
+  //     ship.setAttribute("class", "spaceship");
+  //     ship.style.left = `${x1}%`;
+  //     ship.style.top = `${y1}%`;
+  //     ship.style.backgroundColor = `red`;
+  //     ship.style.transition = "left 2s linear, top 2s linear";
+  //     console.log("appending...");
+  //     container.appendChild(ship);
 
-      console.log("grabbing by id...");
+  //     console.log("grabbing by id...");
 
-      setTimeout(() => {
-        const ship_start_moving = document.getElementById(uniqueId);
-        console.log("grabbed...");
-        console.log("grabbed ship:", ship_start_moving);
-        console.log(`changing ships location from ${x1} ${y1} to ${x2} ${y2}`);
-        ship_start_moving.style.left = `${x2}%`;
-        ship_start_moving.style.top = `${y2}%`;
-      }, 10);
-      // ship.style.left = `${x2}%`;
-      // ship.style.top = `${y2}%`;
-      console.log("moved...");
-    }
-  }, [movingUsers]);
+  //     setTimeout(() => {
+  //       const ship_start_moving = document.getElementById(uniqueId);
+  //       console.log("grabbed...");
+  //       console.log("grabbed ship:", ship_start_moving);
+  //       console.log(`changing ships location from ${x1} ${y1} to ${x2} ${y2}`);
+  //       ship_start_moving.style.left = `${x2}%`;
+  //       ship_start_moving.style.top = `${y2}%`;
+  //     }, 10);
+  //     // ship.style.left = `${x2}%`;
+  //     // ship.style.top = `${y2}%`;
+  //     console.log("moved...");
+  //   }
+  // }, [movingUsers]);
   return (
     <div
       style={{
@@ -181,7 +180,7 @@ export const Planets = (props) => {
                   position: "relative",
                 }}
               >
-                <div
+                {/* <div
                   className="spaceship"
                   style={{
                     left: `${x}%`,
@@ -192,7 +191,7 @@ export const Planets = (props) => {
                       timeToTravel
                     )}s linear`,
                   }}
-                ></div>
+                ></div> */}
                 {/* <svg
                   viewBox="0 0 100 100"
                   preserveAspectRatio="none"

@@ -1,6 +1,7 @@
 import { RiCompassDiscoverLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
 export const Planet = (props) => {
+  console.log(props.planet)
   const user = useSelector((state) => state.user_data.user);
   return (
     <>
@@ -15,8 +16,8 @@ export const Planet = (props) => {
           position: "absolute",
           transform: "translate(-50%, -50%)",
           height: `${props.planet.planet_size}%`,
-          top: `${props.planet.planet_position.top}%`,
-          left: `${props.planet.planet_position.left}%`,
+          top: `${props.planet.planet_position_y}%`,
+          left: `${props.planet.planet_position_x}%`,
           zIndex: 1,
         }}
       >
