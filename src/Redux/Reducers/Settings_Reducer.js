@@ -1,6 +1,6 @@
 import { CHANGE_ASTEROID_DENSITY } from "../Actions/Settings_Actions";
 const initialState = {
-  asteroid_density: "high",
+  asteroid_density: { setting: "high", value: 200 },
 };
 
 const Settings_Reducer = (state = initialState, action) => {
